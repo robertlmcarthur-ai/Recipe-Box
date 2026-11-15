@@ -16,11 +16,12 @@ Recipe Box keeps your family's favorite dinners, sides, and appetizers in one pl
 
 Use Recipe Box to:
 - Get a random main, side, and appetizer suggestion each time you open the app
-- Browse 33 recipes with ingredients, step-by-step instructions, and shopping lists
+- Browse all 33 recipes by course (mains, sides, appetizers, bread), or search by name or ingredient
+- See ingredients, step-by-step instructions, and a shopping list for every version
 - Save favorites so they're easy to find later
 - Copy a shopping list with one tap
 
-Recipe Box works offline. All recipes are built in, and nothing you do is sent anywhere.
+Recipe Box works offline. All recipes are built in, and your favorites stay on your device. The only thing the app ever sends is a recipe video suggestion, and only if you choose to submit one.
 
 Note: recipes are written from general cooking knowledge. Check ingredient labels, especially for allergies and dietary needs, before you cook.
 
@@ -36,8 +37,9 @@ Answer "None" to every content question. The app has no objectionable content.
 - Tracking: No.
 
 ## Screenshots needed
-- 6.7-inch iPhone (1290 x 2796): Recommended section, a recipe with the Original version, the Keto version, favorites
-- 6.5-inch iPhone (1284 x 2778): the same four screens
+- 6.9-inch iPhone (1290 x 2796 or 1320 x 2868): home with Recommended, the All recipes list, a recipe in the Original version, the same recipe in Keto, favorites
+- 13-inch iPad (2064 x 2752): the same screens. Required because the Xcode project targets iPad as well as iPhone. To skip these, set the target to iPhone only in Xcode (General > Supported Destinations).
+- Check the current size list before capturing: https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications
 
 ## Needs review before release
 Every recipe below is marked "Drafted — verify" and needs a person to check the ingredients, steps, and dietary versions before public release:
@@ -45,6 +47,11 @@ RB-001, RB-002, RB-003, RB-004, RB-005, RB-006, RB-007, RB-008, RB-009, RB-010, 
 
 ## Still to do (Mac)
 - Apple Developer enrollment
-- App icon (1024 x 1024) and launch screen in Xcode
+- App icon and launch image are now in the project (simple "RB" recipe-card mark); replace with final artwork if wanted
+- Run `npm install` then `npm run sync` so the updated www/index.html is copied into the iOS app
+- In Xcode, confirm PrivacyInfo.xcprivacy shows under the App target (Build Phases > Copy Bundle Resources)
+- Test on a real iPhone: copy shopping list, favorites surviving a relaunch, and one form submission
+- Turn on GitHub Pages for this repo so the privacy policy URL above is live
+- iPhone is locked to portrait; iPad still rotates
 - Screenshots
 - Archive and upload through Xcode
