@@ -39,6 +39,7 @@ li{margin:4px 0}
 .copy{margin-top:14px;width:100%}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 16px}
 .panel .row{padding:6px 0}
+.panel input{font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:10px;width:100%;min-height:44px;background:#fff}
 footer{font-size:13px;color:var(--muted);margin-top:32px;text-align:center}
 @media (min-width:720px){#recs{grid-template-columns:repeat(3,1fr)}}
 </style>
@@ -59,6 +60,16 @@ footer{font-size:13px;color:var(--muted);margin-top:32px;text-align:center}
   <div class="label">Your favorites</div>
   <div id="favs"></div>
   <div id="detail"></div>
+  <div class="label">Found a recipe video?</div>
+  <form id="subForm" class="panel" novalidate>
+    <p class="meta">Paste the link to a recipe video and tell us the dish name. We'll review it and add it to Recipe Box.</p>
+    <div class="row"><label>Video link (required)</label><input type="url" name="video" id="subVideo" placeholder="https://" required></div>
+    <div class="row"><label>Dish name (optional)</label><input type="text" name="dish" maxlength="120"></div>
+    <div class="row"><label>Note (optional)</label><textarea name="note" rows="3" maxlength="500" style="width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px"></textarea></div>
+    <div class="row"><label>Your email (optional, only if you want a reply)</label><input type="email" name="email" maxlength="200"></div>
+    <div class="row"><button type="submit" id="subBtn">Send</button></div>
+    <div id="subMsg" class="meta"></div>
+  </form>
   <footer>Recipes are drafted from general knowledge. Check ingredients and labels before cooking, especially for allergies or dietary needs.</footer>
 </main>
 
@@ -333,6 +344,22 @@ function renderFavs(){
   if(!ids.length){el.innerHTML='<div class="meta">Save a recipe to find it here.</div>';return}
   el.innerHTML='<div class="panel">'+ids.map(id=>{const r=RECIPES.find(x=>x.id===id);return r?`<div class="row"><a class="name" href="#detail" data-open="${esc(r.id)}">${esc(r.name)}</a></div>`:""}).join("")+'</div>';
 }
+
+const SUBMIT_URL="https://formspree.io/f/xzeregvv";
+$("subForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const msg=$("subMsg"), btn=$("subBtn");
+  const video=$("subVideo").value.trim();
+  if(!/^https?:\/\//i.test(video)){msg.textContent="Please paste a full link that starts with https://";return}
+  btn.disabled=true; msg.textContent="Sending…";
+  try{
+    const data=new FormData($("subForm"));
+    const res=await fetch(SUBMIT_URL,{method:"POST",body:data,headers:{Accept:"application/json"}});
+    if(res.ok){$("subForm").reset();msg.textContent="Thanks! We received your recipe video."}
+    else{msg.textContent="Sorry, that didn't send. Please try again."}
+  }catch(err){msg.textContent="No connection. Please try again when you're online."}
+  btn.disabled=false;
+});
 
 renderVersionButtons();
 renderRecs();
