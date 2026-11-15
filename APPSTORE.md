@@ -31,7 +31,9 @@ recipes,dinner,sides,appetizers,gluten free,dairy free,nut free,keto,meal planni
 Answer "None" to every content question. The app has no objectionable content.
 
 ## Privacy nutrition label
-Data not collected. The app collects no data and does not track users.
+- Contact info (email address): collected only if a user chooses to enter it in the recipe submission form. Not linked to identity, not used for tracking. Used for app functionality.
+- Other user content (video link, dish name, note): collected only from the submission form. Used for app functionality.
+- Tracking: No.
 
 ## Screenshots needed
 - 6.7-inch iPhone (1290 x 2796): Recommended section, a recipe with the Original version, the Keto version, favorites
