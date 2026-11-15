@@ -1,0 +1,14 @@
+{
+  "name": "recipe-box",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Recipe Box: family recipes with Original, gluten-free, dairy- and nut-free, and keto versions",
+  "scripts": {
+    "sync": "npx cap sync ios"
+  },
+  "dependencies": {
+    "@capacitor/cli": "^8.6.2",
+    "@capacitor/core": "^8.6.2",
+    "@capacitor/ios": "^8.6.2"
+  }
+}
