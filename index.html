@@ -37,6 +37,8 @@ h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute
 ul,ol{margin:0;padding-left:22px}
 li{margin:4px 0}
 .copy{margin-top:14px;width:100%}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 16px}
+.panel .row{padding:6px 0}
 footer{font-size:13px;color:var(--muted);margin-top:32px;text-align:center}
 @media (min-width:720px){#recs{grid-template-columns:repeat(3,1fr)}}
 </style>
@@ -54,6 +56,8 @@ footer{font-size:13px;color:var(--muted);margin-top:32px;text-align:center}
 <main>
   <div class="label">Recommended for you</div>
   <div id="recs"></div>
+  <div class="label">Your favorites</div>
+  <div id="favs"></div>
   <div id="detail"></div>
   <footer>Recipes are drafted from general knowledge. Check ingredients and labels before cooking, especially for allergies or dietary needs.</footer>
 </main>
@@ -277,6 +281,7 @@ function renderDetail(){
     <h3>Steps</h3><ol>${ul(v.s)}</ol>
     <h3>Shopping list</h3><ul>${ul(v.p)}</ul>
     <button class="ghost copy" id="copyList">Copy shopping list</button>
+    <button class="ghost copy" id="favBtn">${isFav(r.id)?"Remove from favorites":"Save to favorites"}</button>
   </article>`;
 }
 
@@ -305,6 +310,7 @@ document.addEventListener("click",e=>{
     $("detail").scrollIntoView({behavior:"smooth",block:"start"});
     return;
   }
+  if(t.matches("#favBtn")){toggleFav(selectedId);return}
   if(t.matches("#copyList")){
     const r=RECIPES.find(x=>x.id===selectedId);
     const v=versionFor(r,version);
@@ -314,8 +320,22 @@ document.addEventListener("click",e=>{
 $("q").addEventListener("keydown",e=>{if(e.key==="Enter")search()});
 $("q").addEventListener("input",()=>{if(!$("q").value.trim()){picks=null;renderRecs();$("status").textContent=""}});
 
+
+const FAV_KEY="recipebox-favorites";
+function getFavs(){try{return JSON.parse(localStorage.getItem(FAV_KEY)||"[]")}catch(e){return[]}}
+function setFavs(a){try{localStorage.setItem(FAV_KEY,JSON.stringify(a))}catch(e){}}
+function isFav(id){return getFavs().includes(id)}
+function toggleFav(id){const a=getFavs();const i=a.indexOf(id);if(i>=0)a.splice(i,1);else a.push(id);setFavs(a);renderFavs();renderDetail();}
+function renderFavs(){
+  const ids=getFavs();
+  const el=$("favs");
+  if(!ids.length){el.innerHTML='<div class="meta">Save a recipe to find it here.</div>';return}
+  el.innerHTML='<div class="panel">'+ids.map(id=>{const r=RECIPES.find(x=>x.id===id);return r?`<div class="row"><a class="name" href="#detail" data-open="${esc(r.id)}">${esc(r.name)}</a></div>`:""}).join("")+'</div>';
+}
+
 renderVersionButtons();
 renderRecs();
+renderFavs();
 </script>
 </body>
 </html>
