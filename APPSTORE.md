@@ -41,9 +41,29 @@ Answer "None" to every content question. The app has no objectionable content.
 - 13-inch iPad (2064 x 2752): the same screens. Required because the Xcode project targets iPad as well as iPhone. To skip these, set the target to iPhone only in Xcode (General > Supported Destinations).
 - Check the current size list before capturing: https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications
 
-## Needs review before release
-Every recipe below is marked "Drafted — verify" and needs a person to check the ingredients, steps, and dietary versions before public release:
-RB-001, RB-002, RB-003, RB-004, RB-005, RB-006, RB-007, RB-008, RB-009, RB-010, RB-011, RB-012, RB-013, RB-014, RB-015, RB-016, RB-017, RB-018, RB-019, RB-020, RB-021, RB-022, RB-023, RB-024, RB-025, RB-026, RB-027, RB-028, RB-029, RB-030, RB-031, RB-032, RB-033
+## Recipe review status
+All 33 recipes (RB-001 to RB-033) and their four versions were reviewed on November 15, 2026. This was a desk review by Claude (AI) against general cooking, food-safety and allergen knowledge. No recipe was cooked or tested, and it is not a professional dietitian or allergist review. The in-app "check every label" warnings stay in place.
+
+Fixed in this review:
+- Molly's versions: every dairy substitute (cheese, cream cheese, sour cream, feta, buttery spread, ranch, Caesar) now says nut-free, because many are almond- or cashew-based
+- RB-016 Molly: oat milk now must be certified gluten-free (or use soy milk)
+- RB-031 Molly: puff pastry now gluten-free as well as dairy-free
+- RB-025 Maddie: blue cheese marked "check label"
+- RB-010 Keto: sausage was at risk of undercooking ("about 20 min total"); now full time to 160°F
+- RB-005 Keto: xanthan gum no longer used to coat the beef; amount cut to 1/4 tsp for the sauce
+- RB-013 Keto: black beans replaced with avocado
+- RB-018 Keto: corn replaced with zucchini
+- RB-003: all three dietary versions now have full ingredient lists, steps and shopping lists instead of swap notes
+- RB-001, RB-002, RB-005, RB-010, RB-012, RB-023, RB-033: versions no longer say "as in base"; steps are written out
+
+Owner sign-off still needed:
+- RB-003 Molly uses coconut cream. Confirm coconut is acceptable for a nut-free version.
+- RB-004 Molly keeps sesame seeds (optional). Sesame is not a nut but is a common allergen.
+- RB-021 Keto still uses carrots (reduced to 3/4 lb). Decide whether that is keto enough.
+- RB-003 seasoning and xanthan gum amounts are marked "estimate" in the recipe.
+- RB-001 bakes at 390°F and RB-002 lists 2 tbsp flaky finishing salt. Confirm both against the source videos.
+- Brand examples (Violife, Tofutti, Earth Balance, King Arthur) change their formulas; confirm current labels.
+- Nothing has been kitchen-tested.
 
 ## Still to do (Mac)
 - Apple Developer enrollment
